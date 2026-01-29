@@ -32,4 +32,4 @@ def process_students(lines):
     return students
 
 # Task3 - Grade calculator
-def calculate_grade(marks):
+# def calculate_grade(marks):
