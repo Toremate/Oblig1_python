@@ -1,5 +1,3 @@
-
-
 # Task1 - File reader
 def read_students(file_path):
     lines = []
@@ -30,27 +28,28 @@ def process_students(lines):
             students.append((student_id, name, int(mark)))
         except ValueError:
             print(f"Invalid record: {line}")
-
     return students
+
 
 # Task3 - Grade calculator
 def calculate_grade(students):
     graded = []
     for student_id, name, mark in students:
-
         if mark > 89:
             grade = "A"
 
-        elif mark > 79  and mark < 90:
+        elif mark > 79 and mark < 90:
             grade = "B"
 
         elif mark > 59 and mark < 80:
             grade = "C"
 
-        else: grade = "D"
+        else:
+            grade = "D"
 
-        graded.append((student_id, name, mark, grade))
+        graded.append((name, mark, grade))
     return graded
+
 
 # Task4 - Write Output File
 def write_results(file_path_output, graded):
@@ -58,23 +57,22 @@ def write_results(file_path_output, graded):
     from datetime import datetime
     try:
         timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M")
-        filename =f"Students Graded {timestamp}.txt"
+        filename = f"Students Graded {timestamp}.txt"
         full_path = Path(file_path_output) / filename
         with open(full_path, "w") as f:
-            for student_id, name, mark, grade in graded:
-                f.write(f"{student_id}, {name}, {mark}, {grade}\n")
+            for name, mark, grade in graded:
+                f.write(f"{name}, {mark}, {grade}\n")
         return True
     except Exception as e:
         return False
 
+
 # Task5 - Report Generator
 def generate_report(file_path, file_path_output, graded):
-
-
     total_students = len(graded)
     sum_marks = 0
-    counts = {"A":0, "B":0, "C":0, "D":0}
-    for _, _, mark, grade in graded:
+    counts = {"A": 0, "B": 0, "C": 0, "D": 0}
+    for _, mark, grade in graded:
         sum_marks += mark
         counts[grade] += 1
 
@@ -91,6 +89,7 @@ def generate_report(file_path, file_path_output, graded):
         Number of C grades: {counts["C"]}
         Number of D grades: {counts["D"]}""")
 
+
 def main():
     file_path = input("Enter absolute file path: ")
     file_path_output = input("Enter absolute output file path: ")
@@ -104,5 +103,6 @@ def main():
     else:
         print("Something went wrong.")
 
-if __name__=="__main__":
+
+if __name__ == "__main__":
     main()
