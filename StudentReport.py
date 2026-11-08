@@ -28,7 +28,6 @@ def process_students(lines):
             students.append((student_id, name, int(mark)))
         except ValueError:
             print(f"Invalid record: {line}\n")
-
     return students
 
 
@@ -36,7 +35,6 @@ def process_students(lines):
 def calculate_grade(students):
     graded = []
     for student_id, name, mark in students:
-
         if mark > 89:
             grade = "A"
 
@@ -49,7 +47,7 @@ def calculate_grade(students):
         else:
             grade = "D"
 
-        graded.append((student_id, name, mark, grade))
+        graded.append((name, mark, grade))
     return graded
 
 
@@ -64,6 +62,7 @@ def write_results(file_path_output, graded):
         with open(full_path, "w") as temp:
             for student_id, name, mark, grade in graded:
                 temp.write(f"{student_id}, {name}, {mark}, {grade}\n")
+
         return True
     except Exception as e:
         print("Error in write_results().")
